@@ -1,0 +1,209 @@
+<p>template-form works!</p>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+ 
+<form  #personForm="ngForm" (ngSubmit)="savePerson(personForm)">
+    <div class="colr container">
+        <div class="row">
+
+            <div class="col-md-4 form-group">
+                <!-- <label for="exampleInputName1">First Name</label>
+                <input type="text" name="fname" class="form-control" id="exampleInputName1"
+                    aria-describedby="namelHelp" placeholder="Enter name" [(ngModel)]="fname"> -->
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Name</mat-label>
+                      <input required id="fname" type="text" name="fname" #firstName="ngModel" [(ngModel)]="fname" matInput >
+                      <mat-error *ngIf="firstName.invalid">
+                          firstName is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+            </div>
+            <div class="col-md-4 form-group">
+                <!-- <label for="middlename">Middle Name</label>
+                <input type="text" name="mname" class="form-control" id="mname"
+                    placeholder="mname" [(ngModel)]="mname"> -->
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Middle Name</mat-label>
+                      <input required id="mname" type="text" name="mname" #middleName="ngModel" [(ngModel)]="mname" matInput >
+                      <mat-error *ngIf="middleName.invalid">
+                          middleName is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+                <!-- <label for="lastname">Last Name</label>
+                <input type="text" class="form-control" name="lname" [(ngModel)]="lname" id="lastname"
+                    placeholder="lastname"> -->
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Last Name</mat-label>
+                      <input required id="lname" type="text" name="lname" #lastName="ngModel" [(ngModel)]="lname" matInput >
+                      <mat-error *ngIf="lastName.invalid">
+                          lastName is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" name="dob" class="form-control" id="dob"
+                    aria-describedby="dob"  placeholder="Enter dob" [(ngModel)]="dob">
+
+                  
+
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="gender">Gender</label>
+                <!-- <input type="text" name="gender" class="form-control" id="gender"
+                    placeholder="gender" ngModel> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Gender</mat-label>
+                        <mat-select selectValidate name="gender" #mygender="ngModel" [(ngModel)]="gender">
+                          <mat-option *ngFor="let g of genders" [value]="g.viewValue">
+                            {{g.Text}}
+                          </mat-option> 
+                        </mat-select>
+                        <mat-error *ngIf="mygender.errors?.['defaultSelected']">
+                          Gender is <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+                <!-- <label for="pin">Age</label>
+                <input type="text" class="form-control" name="age" [(ngModel)]="age" id="age"
+                    placeholder="age"> -->
+
+                     <!-- <mat-form-field class="example-full-width" appearance="fill"> -->
+                      <mat-label>Age</mat-label>
+                      <input required type="text" name="age" class="form-control" id="age"
+                      aria-describedby="age" #ageValidate="ngModel" selectAgeValidate placeholder="Enter age" [(ngModel)]="age">
+                      <mat-error *ngIf="ageValidate.errors?.['defaultSelected']">
+                          invalid <strong>age</strong>
+                        </mat-error>
+                    <!-- </mat-form-field> -->
+            </div>
+        </div>
+
+
+        <div class="row">
+
+          <div class="col-md-6 form-group">
+            <label for="address1">Address1</label>
+            <input type="text" class="form-control" name="address1" [(ngModel)]="address1" id="address1"
+                placeholder="address1">
+        </div>
+
+           <div class="col-md-6 form-group">
+              <label for="address2">Address2</label>
+              <input type="text" class="form-control" name="address2" [(ngModel)]="address2" id="address2"
+                  placeholder="address2">
+          </div>
+      </div>
+
+
+        <div class="row">
+
+            <div class="col-md-4 form-group">
+                <label for="exampleInputName1">Country</label>
+                <!-- <input type="text" name="fullName" class="form-control" id="exampleInputName1"
+                    aria-describedby="emailHelp" placeholder="Enter name" [(ngModel)]="fullName"> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select Country</mat-label>
+                        <mat-select  name="country" [(ngModel)]="country" >
+                          <mat-option *ngFor="let c of countryArray" (click)="detectCountryChange($event)" [value]="c.value">
+                            {{c.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="exampleInputPassword1">State</label>
+                <!-- <input type="text" name="password" class="form-control" id="exampleInputPassword1"
+                    placeholder="Password" ngModel> -->
+                    <!-- <mat-form-field appearance="fill" style="background-color:white;"> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Select state</mat-label>
+                        <mat-select name="state" [(ngModel)]="state"> 
+                          <mat-option (click)="detectStateChange($event)" *ngFor="let state of (countryArray[countryIndex].states)" [value]="state.value">
+                            {{state.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="exampleInputEmail1">City</label>
+                <!-- <input type="text" class="form-control" name="email" [(ngModel)]="email" id="exampleInputEmail1"
+                    placeholder="Email"> -->
+                    <mat-form-field appearance="fill">
+                      <mat-label>City</mat-label>
+                      <mat-select name="city" [(ngModel)]="city">
+                        <mat-option *ngFor="let city of  (countryArray[countryIndex].states[stateIndex].cities)" [value]="city.value">
+                          {{city.viewValue}} 
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field> 
+            </div>
+        </div>
+      
+
+        <div class="row">
+
+         
+         
+          <div class="col-md-4 form-group">
+              <!-- <label for="pin">PIN</label>
+              <input required type="text" class="form-control" maxlength="10"  name="pin" [(ngModel)]="pin" id="pin"
+                  placeholder="000000"> -->
+
+                  <mat-label>PIN</mat-label>
+                  <input required type="text" name="pin" class="form-control" id="pin"
+                  aria-describedby="pin" #pinValidate="ngModel" selectPinValidate placeholder="Enter pin" [(ngModel)]="pin">
+                  <mat-error *ngIf="pinValidate.errors?.['defaultSelected']">
+                      invalid <strong>pin</strong>
+                    </mat-error>
+          </div>
+      </div>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" (click)="doProcess()" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<!-- 
+<h4>Basic mat-select</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Favorite food</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let food of foods" [value]="food.value">
+      {{food.viewValue}}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
+
+<br>
+<br>
+<br>
+<br>
+
+<button mat-button (click)="openDialog()">Launch dialog</button>
+
+<!-- <app-modelapproach></app-modelapproach> -->
+
+
+
+
