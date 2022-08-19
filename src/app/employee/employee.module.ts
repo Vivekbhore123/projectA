@@ -15,7 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { RouterModule } from '@angular/router';
 import { DialogElementsExampleDialog } from './edit/dialogelement/dialogelement';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     EmployeeComponent,
@@ -35,7 +35,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatSelectModule,
     RouterModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   exports:[EmployeeComponent]
 })

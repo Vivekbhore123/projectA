@@ -13,12 +13,16 @@ import { RegisterModule } from './register/register.module';
 // import { FormsModule } from '@angular/forms'; in login module
 
 
+
 // import {MatInputModule} from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EmployeeModule } from './employee/employee.module';
 import {MatTableModule} from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { EmpDataService } from './core/services/empService/empData.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import {MatTableModule} from '@angular/material/table';
     // MatInputModule,
     MatFormFieldModule,
     EmployeeModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(EmpDataService)
     
   ],
   providers: [NavbarComponent],

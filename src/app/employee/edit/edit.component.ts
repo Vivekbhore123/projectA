@@ -3,8 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogElementsExampleDialog } from './dialogelement/dialogelement';
+import { ActivatedRoute } from '@angular/router';
+import { EmployeeComponent } from '../employee.component';
+import { LoginService } from 'src/app/core/services/login.service';
+import {EmployeeService} from "../../core/services/empService/emp.service"
 
 
+// import {Gender} from "../../core/models/users.model";
 
 
 interface City {
@@ -27,11 +32,13 @@ interface Country {
   states:State[];
 }
 
+
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
-  providers:[DialogElementsExampleDialog]
+  providers:[DialogElementsExampleDialog,EmployeeComponent,LoginService,EmployeeService]
 })
 export class EditComponent implements OnInit {
 
@@ -41,7 +48,7 @@ export class EditComponent implements OnInit {
   mname:string = "";
   lname:string = "";
   age:number=0;
-   gender:string = "";
+  gender:string = "";
   
    country:String = "";
    pin:Number = 0;
@@ -53,20 +60,35 @@ export class EditComponent implements OnInit {
    
 
 
-  constructor(public dialog: MatDialog) {
-
-    console.log("testing")
-   }
+ 
 
    openDialog() {
     this.dialog.open(DialogElementsExampleDialog);
   }
 
+
+  EmployeeId:string|null='';
+
+  constructor(private _route:ActivatedRoute,private obj:EmployeeComponent,public dialog: MatDialog,public serviceobj:LoginService,private empservice:EmployeeService){
+
+  }
+  dataTofill:any={};
   ngOnInit(): void {
-    console.log("testing")
+    
+    this.EmployeeId= this._route.snapshot.paramMap.get('code'); 
+    console.log("testing",this.EmployeeId)
+      
+    //befor using http
+    // this.dataTofill =  this.serviceobj.findRowFromService(this.EmployeeId); 
+
+    //with http call
+    this.dataTofill =  this.empservice.findRowFromService(this.EmployeeId); 
+    
+
+    console.log(this.dataTofill)
   }
 
- 
+  
   
 fullName:string="";
 // email:string="";
@@ -75,41 +97,17 @@ fullName:string="";
 savePerson(form:NgForm){
   console.log(form);
   console.log("**************");
-  console.log(form.value);
+  console.log(typeof form.value.gender);
 
 }
 
-genderArr:any[]=[
- { gen:"male"},
- {gen:"female"}
-
-]
 
 
 genders:any[]=[
   {viewValue:-1,Text:"Select Gender"},
-  {viewValue:1,Text:"Male"},
-  {viewValue:2,Text:"FeMale"}
+  {viewValue:1,Text:"male"},
+  {viewValue:2,Text:"female"} 
 ];
-
-// state: State[] = [
-//   {value: 'Maharashtra', viewValue: 'Maharashtra'},
-//   {value: 'Bihar', viewValue: 'Bihar'},
-//   {value: 'Karnataka', viewValue: 'Karnataka'},
-// ];
-
-// {
-//   value:string,
-//   viewValue:string
-// },{
-//   value:string,
-//   viewValue:string
-// },
-// {
-//   value:string,
-//   viewValue:string
-// }
-
 
 
 countryArray: Country[] = [
@@ -175,6 +173,7 @@ for(let i=0;i<this.countryArray[this.countryIndex].states.length;i++)
 doProcess(){
   console.log(this.countryArray);
   console.log(this.countryArray[0].states);
+  this.openDialog();
 }
 
 

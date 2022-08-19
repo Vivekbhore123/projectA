@@ -59,6 +59,7 @@ validateUser()
   }
   else 
   {
+    alert("wrong credentials")
     this.router.navigate(['/login'])
   }
 }

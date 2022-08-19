@@ -1,1 +1,12 @@
 <p>delete works!</p>
+<mat-card>
+    <mat-card-title>Actions Buttons</mat-card-title>
+    <mat-card-subtitle>End</mat-card-subtitle>
+    <h3>Firstname :  {{tempObj.fname}}</h3>
+    <h3>Middlename :  {{tempObj.mname}}</h3>
+    <h3>Lastname :  {{tempObj.lname}}</h3>
+    <mat-card-actions align="end">
+      <button (click)="openDialog()" mat-button>Delete</button> &nbsp;
+      <button routerLink="/emplist" mat-button>Cancel</button>
+    </mat-card-actions>
+  </mat-card>

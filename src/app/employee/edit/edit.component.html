@@ -18,7 +18,7 @@
 
                     <mat-form-field class="example-full-width" appearance="fill">
                       <mat-label>Name</mat-label>
-                      <input required id="fname" type="text" name="fname" #firstName="ngModel" [(ngModel)]="fname" matInput >
+                      <input required id="fname"  type="text" name="fname" #firstName="ngModel" [(ngModel)]="dataTofill.fname" matInput >
                       <mat-error *ngIf="firstName.invalid">
                           firstName is <strong>required</strong>
                         </mat-error>
@@ -32,7 +32,7 @@
 
                     <mat-form-field class="example-full-width" appearance="fill">
                       <mat-label>Middle Name</mat-label>
-                      <input required id="mname" type="text" name="mname" #middleName="ngModel" [(ngModel)]="mname" matInput >
+                      <input required id="mname" value="dataTofill.mname" type="text" name="mname" #middleName="ngModel" [(ngModel)]="dataTofill.mname" matInput >
                       <mat-error *ngIf="middleName.invalid">
                           middleName is <strong>required</strong>
                         </mat-error>
@@ -45,7 +45,7 @@
 
                     <mat-form-field class="example-full-width" appearance="fill">
                       <mat-label>Last Name</mat-label>
-                      <input required id="lname" type="text" name="lname" #lastName="ngModel" [(ngModel)]="lname" matInput >
+                      <input required id="lname" type="text" value="dataTofill.lname" name="lname" #lastName="ngModel" [(ngModel)]="dataTofill.lname" matInput >
                       <mat-error *ngIf="lastName.invalid">
                           lastName is <strong>required</strong>
                         </mat-error>
@@ -53,12 +53,12 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row"> 
 
             <div class="col-md-4 form-group">
                 <label for="dob">Date of Birth</label>
                 <input type="date" name="dob" class="form-control" id="dob"
-                    aria-describedby="dob"  placeholder="Enter dob" [(ngModel)]="dob">
+                    aria-describedby="dob"  placeholder="Enter dob" [(ngModel)]="dataTofill.dob">
 
                   
 
@@ -69,8 +69,8 @@
                     placeholder="gender" ngModel> -->
                     <mat-form-field appearance="fill">
                         <mat-label>Gender</mat-label>
-                        <mat-select selectValidate name="gender" #mygender="ngModel" [(ngModel)]="gender">
-                          <mat-option *ngFor="let g of genders" [value]="g.viewValue">
+                        <mat-select selectValidate name="gender" #mygender="ngModel" [(ngModel)]="dataTofill.gender">
+                          <mat-option *ngFor="let g of genders" [value]="g.Text">
                             {{g.Text}}
                           </mat-option> 
                         </mat-select>
@@ -87,7 +87,7 @@
                      <!-- <mat-form-field class="example-full-width" appearance="fill"> -->
                       <mat-label>Age</mat-label>
                       <input required type="text" name="age" class="form-control" id="age"
-                      aria-describedby="age" #ageValidate="ngModel" selectAgeValidate placeholder="Enter age" [(ngModel)]="age">
+                      aria-describedby="age" #ageValidate="ngModel" selectAgeValidate placeholder="Enter age" [(ngModel)]="dataTofill.age">
                       <mat-error *ngIf="ageValidate.errors?.['defaultSelected']">
                           invalid <strong>age</strong>
                         </mat-error>
@@ -100,13 +100,13 @@
 
           <div class="col-md-6 form-group">
             <label for="address1">Address1</label>
-            <input type="text" class="form-control" name="address1" [(ngModel)]="address1" id="address1"
+            <input type="text" class="form-control" name="address1" [(ngModel)]="dataTofill.address1" id="address1"
                 placeholder="address1">
         </div>
 
            <div class="col-md-6 form-group">
               <label for="address2">Address2</label>
-              <input type="text" class="form-control" name="address2" [(ngModel)]="address2" id="address2"
+              <input type="text" class="form-control" name="address2" [(ngModel)]="dataTofill.address2" id="address2"
                   placeholder="address2">
           </div>
       </div>
@@ -120,7 +120,7 @@
                     aria-describedby="emailHelp" placeholder="Enter name" [(ngModel)]="fullName"> -->
                     <mat-form-field appearance="fill">
                         <mat-label>Select Country</mat-label>
-                        <mat-select  name="country" [(ngModel)]="country" >
+                        <mat-select  name="country" [(ngModel)]="dataTofill.country" >
                           <mat-option *ngFor="let c of countryArray" (click)="detectCountryChange($event)" [value]="c.value">
                             {{c.viewValue}}
                           </mat-option>
@@ -134,7 +134,7 @@
                     <!-- <mat-form-field appearance="fill" style="background-color:white;"> -->
                     <mat-form-field appearance="fill">
                         <mat-label>Select state</mat-label>
-                        <mat-select name="state" [(ngModel)]="state"> 
+                        <mat-select name="state" [(ngModel)]="dataTofill.state"> 
                           <mat-option (click)="detectStateChange($event)" *ngFor="let state of (countryArray[countryIndex].states)" [value]="state.value">
                             {{state.viewValue}}
                           </mat-option>
@@ -147,7 +147,7 @@
                     placeholder="Email"> -->
                     <mat-form-field appearance="fill">
                       <mat-label>City</mat-label>
-                      <mat-select name="city" [(ngModel)]="city">
+                      <mat-select name="city" [(ngModel)]="dataTofill.city">
                         <mat-option *ngFor="let city of  (countryArray[countryIndex].states[stateIndex].cities)" [value]="city.value">
                           {{city.viewValue}} 
                         </mat-option>
@@ -168,7 +168,7 @@
 
                   <mat-label>PIN</mat-label>
                   <input required type="text" name="pin" class="form-control" id="pin"
-                  aria-describedby="pin" #pinValidate="ngModel" selectPinValidate placeholder="Enter pin" [(ngModel)]="pin">
+                  aria-describedby="pin" #pinValidate="ngModel" selectPinValidate placeholder="Enter pin" [(ngModel)]="dataTofill.pin">
                   <mat-error *ngIf="pinValidate.errors?.['defaultSelected']">
                       invalid <strong>pin</strong>
                     </mat-error>
@@ -178,6 +178,8 @@
         <div class="row">
             <div class="col-md-3">
                 <button type="submit" (click)="doProcess()" class="btn btn-primary">Submit</button>
+                &nbsp;
+                <button routerLink="/emplist" class="btn btn-success">Return</button>
             </div>
         </div>
     </div>
@@ -200,7 +202,7 @@
 <br>
 <br>
 
-<button mat-button (click)="openDialog()">Launch dialog</button>
+<!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->
 
 <!-- <app-modelapproach></app-modelapproach> -->
 

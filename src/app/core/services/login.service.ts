@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from "rxjs";
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
 
-import {PeriodicElement,Gender,UserType,EmpData} from "../models/users.model"
+import {PeriodicElement,UserType,EmpData} from "../models/users.model"
 
 @Injectable({
   providedIn:"root"
@@ -16,13 +16,14 @@ export class LoginService implements CanActivate {
 
 
   private employees:EmpData[]=[
-    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:Gender.Male,userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" },
-    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:Gender.Female,userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:""  },
-    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:Gender.Female,userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:""  },
-    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:Gender.Male,userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:""  },
-    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:Gender.Female,userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:""  },
-    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:Gender.Male,userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi" ,btns:"" },
-    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:Gender.Male,userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi" ,btns:"" },
+    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:"male",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"",age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
+    { code:2,fname:"ram",mname:"dom",lname:"ajax",gender:"female",userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:2,fname:"ram",mname:"dom",lname:"ajax",gender:"female",userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:3,fname:"shyam",mname:"shell",lname:"jquery",gender:"female",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:4,fname:"seeta",mname:"toor",lname:"json",gender:"male",userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:5,fname:"geeta",mname:"moore",lname:"xml",gender:"female",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:""  ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
+    { code:6,fname:"dell",mname:"pqr",lname:"lambda",gender:"male",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi" ,btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
+    { code:7,fname:"bill",mname:"xyz",lname:"pixel",gender:"male",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi" ,btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
 
 ]
 
@@ -80,9 +81,23 @@ getEmployees():EmpData[]{
     }
     else 
     {
-     
+       
       return false;
     }
+   }
+
+   findRowFromService(id:any)
+   {
+    let temp={}
+    this.employees.map(item=>{
+      if(item.code==id)
+      {
+        temp = item;
+      }
+      return item
+    })
+    return temp;
+    console.log("row printing")
    }
 
    

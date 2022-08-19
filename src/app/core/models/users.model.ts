@@ -10,10 +10,10 @@ export interface PeriodicElement {
    Permenant = "permenant"
   }
 
-  export enum Gender {
-    Male = "male",
-    Female = "female"
-   }
+  // export enum Gender {
+  //   Male = "male",
+  //   Female = "female"
+  //  }
 
 export interface EmpData {
     code:number;
@@ -25,7 +25,12 @@ export interface EmpData {
     address1: string;
     address2: string;
     userType:UserType;
-    gender:Gender;
+    gender:string; 
     btns:string;
+    age:number;
+    country:string;
+    state:string;
+    city:string;
+    dob:string;
   }
   
